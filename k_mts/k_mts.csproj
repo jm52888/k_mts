@@ -1,0 +1,472 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BED3B5F7-219E-4C7F-9343-B6C7351AED12}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>k_mts</RootNamespace>
+    <AssemblyName>k_mts</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.BonusSkins.v15.1">
+      <HintPath>.\DevExpress.BonusSkins.v15.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Data.v15.1">
+      <HintPath>.\DevExpress.Data.v15.1.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v15.1">
+      <HintPath>.\DevExpress.Utils.v15.1.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Messaging" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Chart\ChartEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Chart\ChartUtility\ChartAdapter\ChartAdapter.cs" />
+    <Compile Include="Chart\ChartUtility\ChartAdapter\ChartAdapterCollection.cs" />
+    <Compile Include="Chart\ChartUtility\ChartAdapter\ChartAdapter_DataSet.cs" />
+    <Compile Include="Chart\ChartUtility\ChartAdapter\ChartAdapter_DataTable.cs" />
+    <Compile Include="Chart\ChartUtility\ChartNamedUtility.cs" />
+    <Compile Include="Chart\ChartUtility\ChartNamedUtilityCollection.cs" />
+    <Compile Include="Chart\ChartUtility\ChartTool\ChartTool.cs" />
+    <Compile Include="Chart\ChartUtility\ChartTool\ChartToolCollection.cs" />
+    <Compile Include="Chart\ChartUtility\ChartTool\ChartToolTemplate.cs" />
+    <Compile Include="Chart\ChartUtility\ChartTool\ChartTool_Cursor.cs" />
+    <Compile Include="Chart\ChartUtility\ChartTool\ChartTool_HorizontalEqualLine2.cs" />
+    <Compile Include="Chart\ChartUtility\ChartTool\ChartTool_Select.cs" />
+    <Compile Include="Chart\ChartUtility\ChartTool\ChartTool_Ellipse.cs" />
+    <Compile Include="Chart\ChartUtility\ChartTool\ChartTool_Hand.cs" />
+    <Compile Include="Chart\ChartUtility\ChartTool\ChartTool_HorizontalEqualLine.cs" />
+    <Compile Include="Chart\ChartUtility\ChartTool\ChartTool_HorizontalInfiniteLine.cs" />
+    <Compile Include="Chart\ChartUtility\ChartTool\ChartTool_HorizontalLine.cs" />
+    <Compile Include="Chart\ChartUtility\ChartTool\ChartTool_InfiniteLine.cs" />
+    <Compile Include="Chart\ChartUtility\ChartTool\ChartTool_Line.cs" />
+    <Compile Include="Chart\ChartUtility\ChartTool\ChartTool_ParallelLine.cs" />
+    <Compile Include="Chart\ChartUtility\ChartTool\ChartTool_Polygon.cs" />
+    <Compile Include="Chart\ChartUtility\ChartTool\ChartTool_Polyline.cs" />
+    <Compile Include="Chart\ChartUtility\ChartTool\ChartTool_Rectangle.cs" />
+    <Compile Include="Chart\ChartUtility\ChartTool\ChartTool_Triangle.cs" />
+    <Compile Include="Chart\ChartUtility\ChartTool\ChartTool_VerticalEqualLine.cs" />
+    <Compile Include="Chart\ChartUtility\ChartTool\ChartTool_VerticalInfiniteLine.cs" />
+    <Compile Include="Chart\ChartUtility\ChartTool\ChartTool_VerticalLine.cs" />
+    <Compile Include="Chart\ChartUtility\ChartTool\ChartTool_Line2.cs" />
+    <Compile Include="Chart\ChartUtility\ChartUtility.cs" />
+    <Compile Include="Chart\ChartUtility\ChartUtilityCollection.cs" />
+    <Compile Include="Chart\ChartUtility\ChartUtilityService.cs" />
+    <Compile Include="Chart\ChartUtility\ChartViewer\ChartView.cs" />
+    <Compile Include="Chart\ChartUtility\ChartViewer\ChartViewer.cs" />
+    <Compile Include="Chart\ChartUtility\ChartViewer\ChartViewerCollection.cs" />
+    <Compile Include="Chart\ChartUtility\Control\ChartColorEditor.cs" />
+    <Compile Include="Chart\CommonService.cs" />
+    <Compile Include="Chart\EventArgs\ToolChangedEventArgs.cs" />
+    <Compile Include="Chart\EventArgs\UtilityNameChangedEventArgs.cs" />
+    <Compile Include="Chart\Extension\AnnotationExtension.cs" />
+    <Compile Include="Chart\Extension\AxisExtension.cs" />
+    <Compile Include="Chart\Extension\ChartAreaCollectionExtension.cs" />
+    <Compile Include="Chart\Extension\ChartDashStyleExtension.cs" />
+    <Compile Include="Chart\Extension\ChartElementExtension.cs" />
+    <Compile Include="Chart\Extension\DataPointCollectionExtension.cs" />
+    <Compile Include="Chart\Interface\IAnnotationEditor.cs" />
+    <Compile Include="Chart\Interface\IAnnotationEventHandler.cs" />
+    <Compile Include="Chart\Interface\IChartCustomizer.cs" />
+    <Compile Include="Chart\Interface\IChartUtility.cs" />
+    <Compile Include="Chart\Interface\IDataUpdateEventHandler.cs" />
+    <Compile Include="Chart\Interface\IKeyboardEventHandler.cs" />
+    <Compile Include="Chart\Interface\IMouseEventHandler.cs" />
+    <Compile Include="Chart\Interface\IPaintEventHandler.cs" />
+    <Compile Include="Chart\Interface\IUtilityNameController.cs" />
+    <Compile Include="Chart\Static\ChartExceptionFactory.cs" />
+    <Compile Include="Chart\Static\ChartMethod.cs" />
+    <Compile Include="Chart\Static\ChartTimer.cs" />
+    <Compile Include="Chart_Edit\SettingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Chart_Edit\SettingForm.Designer.cs">
+      <DependentUpon>SettingForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MyChart\ChartViewer\ChartViewer_k_Bar.cs" />
+    <Compile Include="Controls\MyChart\ChartViewer\ChartViewer_k_Candle.cs" />
+    <Compile Include="Controls\DateComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\MyButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Chart_Edit\Setting_A.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Chart_Edit\Setting_A.Designer.cs">
+      <DependentUpon>Setting_A.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Chart_Edit\Setting_B.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Chart_Edit\Setting_B.Designer.cs">
+      <DependentUpon>Setting_B.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Chart_Edit\Setting_C.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Chart_Edit\Setting_C.Designer.cs">
+      <DependentUpon>Setting_C.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\LabelButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\MyChart\IMyChart.cs" />
+    <Compile Include="Controls\MyChart\MyCandle4Base.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MyChart\MyCandle4Base.Designer.cs">
+      <DependentUpon>MyCandle4Base.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MyChart\MyChart.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MyChart\MyChart.Designer.cs">
+      <DependentUpon>MyChart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MyChart\MyChartController.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MyChart\MyChartController.Designer.cs">
+      <DependentUpon>MyChartController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MyNumericUpDown.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\MyPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\MyChart\MyChart2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MyChart\MyChart2.Designer.cs">
+      <DependentUpon>MyChart2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Data\DBManager.cs" />
+    <Compile Include="Extension\CollectionExtension.cs" />
+    <Compile Include="Extension\ArrayExtension.cs" />
+    <Compile Include="Extension\ControlExtension.cs" />
+    <Compile Include="Extension\DataSetExtension.cs" />
+    <Compile Include="Extension\DataTableExtension.cs" />
+    <Compile Include="Extension\StringExtension.cs" />
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Global.cs" />
+    <Compile Include="Controls\InputBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\MsgBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Controls\MyTabControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\MyChart\MyChartGroup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\MyChart\MyChartGroup.Designer.cs">
+      <DependentUpon>MyChartGroup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Proc\k_mts_proc2.cs" />
+    <Compile Include="Proc\k_mts_proc.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Static\gdi32.cs" />
+    <Compile Include="Static\kernel32.cs" />
+    <Compile Include="Static\User32.cs" />
+    <Compile Include="Static\WinApi.cs" />
+    <Compile Include="Static\WinApi_Callback.cs" />
+    <Compile Include="Static\WinApi_Constant.cs" />
+    <Compile Include="Static\WinApi_Structure.cs" />
+    <EmbeddedResource Include="Chart_Edit\SettingForm.resx">
+      <DependentUpon>SettingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Chart_Edit\Setting_A.resx">
+      <DependentUpon>Setting_A.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Chart_Edit\Setting_B.resx">
+      <DependentUpon>Setting_B.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Chart_Edit\Setting_C.resx">
+      <DependentUpon>Setting_C.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MyChart\MyCandle4Base.resx">
+      <DependentUpon>MyCandle4Base.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MyChart\MyChart.resx">
+      <DependentUpon>MyChart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MyChart\MyChart2.resx">
+      <DependentUpon>MyChart2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MyChart\MyChartController.resx">
+      <DependentUpon>MyChartController.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MyTabControl.resx">
+      <DependentUpon>MyTabControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\MyChart\MyChartGroup.resx">
+      <DependentUpon>MyChartGroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\a.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\b.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\c.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\a1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\그림16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\a2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\a3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\a4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\a5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\a6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\a7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\a8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\t1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\t2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\018.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\017.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\0171.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\0172.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\t21.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\t211.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\t212.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\t213.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\t214.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\t22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\t221.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\t222.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\0173.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\0174.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\t2221.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\t23.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\t22211.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\01741.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\t24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\그림72.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\그림721.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\그림77.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hline1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\사선1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\그림731.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\t215.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\그림991.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\3line.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\3line1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\w1.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\b.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\c.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\d.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\f.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\f2.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\g.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\g1.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\h1.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\k1.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\크기변환_ddd.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fff.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\크기변환__щ낯 -fff.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\777.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\handk3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\handk1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\handk2.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
