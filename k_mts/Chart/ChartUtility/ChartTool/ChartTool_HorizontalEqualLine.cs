@@ -157,39 +157,31 @@ namespace System.Windows.Forms.DataVisualization.Charting
 
         private HorizontalLineAnnotation _CreateAnnotation(bool bAlwaysVisible = false)
         {
-            var anot = new HorizontalLineAnnotation();
-            anot.AllowMoving = this.AllowMoving;
-            anot.AllowResizing = this.AllowResizing;
-            anot.AllowSelecting = this.AllowSelecting;
-            anot.IsInfinitive = this.IsInfinitive;
-            anot.IsSizeAlwaysRelative = this.IsSizeAlwaysRelative;
-            anot.LineColor = this.LineColor;
-            anot.LineDashStyle = this.LineDashStyle;
-            anot.LineWidth = this.LineWidth;
+			var anot = new HorizontalLineAnnotation
+			{
+				AllowMoving = this.AllowMoving,
+				AllowResizing = this.AllowResizing,
+				AllowSelecting = this.AllowSelecting,
+				IsInfinitive = this.IsInfinitive,
+				IsSizeAlwaysRelative = this.IsSizeAlwaysRelative,
+				LineColor = this.LineColor,
+				LineDashStyle = this.LineDashStyle,
+				LineWidth = this.LineWidth,
 
-            anot.ClipToChartArea = curArea.Name;
-            anot.AxisX = Common.GetMainAxisX(curArea);
-            anot.AxisY = Common.GetMainAxisY(curArea);
-            anot.SetAttr("ToolName", this.Name);
-            anot.SetAttr("CheckBox", _CreateCheckBox(anot, bAlwaysVisible));
-            if (this.Alignment == ContentAlignment.MiddleLeft ||
+				ClipToChartArea = curArea.Name,
+				AxisX = Common.GetMainAxisX(curArea),
+				AxisY = Common.GetMainAxisY(curArea)
+			};
+
+			anot.SetAttr("ToolName", this.Name);
+			
+			if (this.Alignment == ContentAlignment.MiddleLeft ||
                 this.Alignment == ContentAlignment.BottomLeft ||
                 this.Alignment == ContentAlignment.TopLeft)
                 anot.Width = -CommonService.MAX_WIDTH;
             else anot.Width = CommonService.MAX_WIDTH;
-            return anot;
-        }
 
-        private CheckBox _CreateCheckBox(Annotation anot, bool bAlwaysVisible)
-        {
-            var chk = new CheckBox();
-            chk.BackColor = Drawing.Color.Transparent;
-            chk.Checked = true;
-            chk.Tag = anot;
-            chk.AutoSize = true;
-            if (bAlwaysVisible) chk.Enabled = false;
-            else chk.CheckedChanged += (sender, e) => anot.Visible = chk.Checked;
-            return chk;
+            return anot;
         }
 
         private void _DoMagnet(Annotation anot)
@@ -291,40 +283,39 @@ namespace System.Windows.Forms.DataVisualization.Charting
             }
             return false;
         }
-
-        public bool OnMouseMove(MouseEventArgs e)
+		
+		public bool OnMouseMove(MouseEventArgs e)
         {
-            if (curAnot == null) return true;
-
+			if (curAnot == null) return true;
+			
             try { curAnot.Y = curAnot.AxisY.PixelPositionToValue(e.Y); }
             catch { return true; }
 
             var lst = curAnot.GetAttr<List<Annotation>>("AnotList");
-            if (lst == null) return true;
+			if (lst == null) return true;
 
-            var curAnot2 = lst.Last();
-            double dy = (curAnot2.Y - curAnot.Y) / (lst.Count - 1);
-            double h = curAnot2.Y - curAnot.Y;
+			var firstAnot = curAnot;
+			var lastAnot = lst.Last();
 
+			double height = lastAnot.Y - firstAnot.Y;
+			double space = height / (lst.Count - 1);
+			
             for (int i = 1; i < lst.Count - 1; i++)
-                lst[i].Y = curAnot.Y +
-                    (this.UseCustomLine ? h * Lines[i].Y : dy * i);
+			{ 				
+				lst[i].Y = firstAnot.Y + (this.UseCustomLine ? height * Lines[i].Y : space * i);
+			}
 
             return true;
         }
 
         public bool OnMouseUp(MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left && curAnot != null)
-            {
-                var lst = curAnot.GetAttr<List<Annotation>>("AnotList");
-                lst.ForEach(a =>
-                {
-                    var chk = a.GetAttr<CheckBox>("CheckBox");
-                    chk.Parent = Common.Chart;
-                });
-            }
-            else if (e.Button == MouseButtons.Right)
+			/*if (e.Button == MouseButtons.Left && curAnot != null)
+			{
+
+			}
+			else */
+			if (e.Button == MouseButtons.Right)
             {
                 Common.Tools.Release();
                 return true;
@@ -343,16 +334,8 @@ namespace System.Windows.Forms.DataVisualization.Charting
 
         public void AnnotationSelectionChanged(Annotation anot)
         {
-            var lst = anot.GetAttr<List<Annotation>>("AnotList");
-            if (lst == null) return;
-
-            bool bVisible = !lst.TrueForAll(a => !a.IsSelected);
-            lst.ForEach(a =>
-            {
-                var chk = a.GetAttr<CheckBox>("CheckBox");
-                if (chk != null) chk.Visible = bVisible;
-            });
-        }
+			
+		}
 
         public void AnnotationPositionChanging(AnnotationPositionChangingEventArgs e)
         {
@@ -375,57 +358,30 @@ namespace System.Windows.Forms.DataVisualization.Charting
 
         public void AnnotationPaint(Annotation anot, PaintEventArgs e)
         {
-            var axisX = anot.AxisX;
-            var axisY = anot.AxisY;
+			var lst = anot.GetAttr<List<Annotation>>("AnotList");
+			if (lst == null) lst = curAnot.GetAttr<List<Annotation>>("AnotList");
 
-            var chk = anot.GetAttr<CheckBox>("CheckBox");
-            if (chk == null) return;
+			// Get Value
+			var first = lst.First();
+			var last = lst.Last();
 
-            double x = 0.0, y = 0.0;
+			double ratio = double.NaN;
+			double space = first.Y - last.Y;
+			if (space != 0) ratio = (anot.Y - last.Y) / space;
 
-            if (chk.Visible)
+			string value = ratio.ToString(this.LabelFormat);
+
+			// Write Value
+			if (anot.X > anot.AxisX.Minimum)
             {
-                if (this.Alignment == ContentAlignment.BottomLeft ||
-                    this.Alignment == ContentAlignment.MiddleLeft ||
-                    this.Alignment == ContentAlignment.TopLeft)
+				double x = anot.AxisX.ValueToPixelPosition(Math.Min(anot.AxisX.Maximum, anot.X)) + this.LabelOffsetX;
+				double y = anot.AxisY.ValueToPixelPosition(anot.Y) + this.LabelOffsetY;
+
+                using (Brush brush = new SolidBrush(this.ForeColor))
                 {
-                    x = axisX.ValueToPixelPosition(axisX.Minimum);
-                    y = axisY.ValueToPixelPosition(anot.Y) + 1.0f;
-                }
-                else
-                {
-                    x = axisX.ValueToPixelPosition(axisX.Maximum);
-                    y = axisY.ValueToPixelPosition(anot.Y) + 1.0f;
-                }
-                chk.Location = new Point((int)x, (int)y);
-
-                var lst = anot.GetAttr<List<Annotation>>("AnotList");
-                if (lst != null)
-                {
-                    var anot1 = lst.Last();
-                    var anot2 = lst.First();
-
-                    double ratio = double.NaN;
-                    double dy = anot2.Y - anot1.Y;
-                    if (dy != 0) ratio = (anot.Y - anot1.Y) / dy;
-
-                    chk.ForeColor = this.ForeColor;
-                    chk.Text = ratio.ToString(this.LabelFormat);
-                }
-                else chk.Text = "";
-            }
-
-            if (chk.Checked && anot.X > axisX.Minimum)
-            {
-                x = anot.AxisX.ValueToPixelPosition(Math.Min(axisX.Maximum, anot.X)) + this.LabelOffsetX;
-                y = anot.AxisY.ValueToPixelPosition(anot.Y) + this.LabelOffsetY;
-
-                using (Brush b = new SolidBrush(this.ForeColor))
-                {
-                    e.Graphics.DrawString(
-                        anot.Y.ToString(axisY.LabelStyle.Format),
-                        this.Font, b,
-                        (float)x, (float)y);
+					e.Graphics.DrawString(
+						$"({anot.Y.ToString(anot.AxisY.LabelStyle.Format)}) {value}",
+                        this.Font, brush, (float)x, (float)y);
                 }
             }
         }
@@ -457,14 +413,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
             if (!Name.Equals(anot.GetAttr("ToolName")) ||
                 !Common.Annotations.Remove(anot)) return false;
 
-            var chk = anot.GetAttr<CheckBox>("CheckBox");
-            if (chk != null)
-            {
-                anot.SetAttr("CheckBox", null);
-                chk.Dispose();
-            }
-
-            var lst = anot.GetAttr<List<Annotation>>("AnotList");
+			var lst = anot.GetAttr<List<Annotation>>("AnotList");
             if (lst != null) lst.ForEach(a =>
             {
                 a.SetAttr("AnotList", null);
