@@ -376,7 +376,10 @@ namespace System.Windows.Forms.DataVisualization.Charting
 			double space = first.Y - last.Y;
 			if (space != 0) ratio = (anot.Y - last.Y) / space;
 
-			string value = ratio.ToString(this.LabelFormat);
+			if(anot.Name != first.Name && anot.Name != last.Name)
+			{
+				ratio = 1.0 - ratio;
+			}
 
 			// Write Value
 			if (anot.X > anot.AxisX.Minimum)
@@ -398,7 +401,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
 				using (Brush brush = new SolidBrush(this.ForeColor))
 				{
 					e.Graphics.DrawString(
-						$"({anot.Y.ToString(anot.AxisY.LabelStyle.Format)}) {value}",
+						$"({anot.Y.ToString(anot.AxisY.LabelStyle.Format)}) {ratio.ToString(this.LabelFormat)}",
 						this.Font, brush, (float)x, (float)y);
 				}
 			}
