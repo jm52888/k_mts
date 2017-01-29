@@ -11,29 +11,30 @@ namespace System.Windows.Forms.DataVisualization.Charting
 {
     public class ChartViewer_k_Candle : ChartViewer, IDataUpdateEventHandler, IChartCustomizer
     {
-        #region Variable and Property
+		#region Variable and Property
 
-        #endregion
+		public int Depth { get; set; } = 100;
 
-        #region Constructor
+		#endregion
 
-        public ChartViewer_k_Candle() : base("k_Candle") { }
-        public ChartViewer_k_Candle(string name) : base(name) { }        
+		#region Constructor
 
-        #endregion
+		public ChartViewer_k_Candle() : base("k_Candle") { }
+        public ChartViewer_k_Candle(string name) : base(name) { }
 
-        #region UpdateView
+		#endregion
 
-        public override void UpdateView(ChartView view)
+		#region UpdateView
+		
+		public override void UpdateView(ChartView view)
         {
-            int d = 100;
             if (!this.Enable) return;
 
-            Series ms = Common.GetMainSeries(view);
+			Series ms = Common.GetMainSeries(view);
             if (ms == null ||
                 ms.ChartType != SeriesChartType.Candlestick) return;
 
-            var axisX = ms.XAxisType == AxisType.Primary ? view.AxisX : view.AxisX2;
+			var axisX = ms.XAxisType == AxisType.Primary ? view.AxisX : view.AxisX2;
             var axisX2 = ms.XAxisType == AxisType.Primary ? view.AxisX2 : view.AxisX;
             var axisY = ms.YAxisType == AxisType.Primary ? view.AxisY : view.AxisY2;
             var axisY2 = ms.YAxisType == AxisType.Primary ? view.AxisY2 : view.AxisY;
@@ -60,8 +61,8 @@ namespace System.Windows.Forms.DataVisualization.Charting
 
             double dy = y_max - y_min;
 
-            axisY.Maximum = y_max + dy * view.MarginTop / d;
-            axisY.Minimum = y_min - dy * view.MarginBottom / d;
+            axisY.Maximum = y_max + dy * view.MarginTop / Depth;
+            axisY.Minimum = y_min - dy * view.MarginBottom / Depth;
             double yInterval = (axisY.ScaleView.ViewMaximum - axisY.ScaleView.ViewMinimum)
                 * view.AxisYIntervalRatio / 100.0;// 100.1; // 100.0이면 y축 최상단 라벨이 종종 안나옴.
             axisY.Interval = Math.Max(view.MinmumHeight, yInterval);
@@ -71,8 +72,8 @@ namespace System.Windows.Forms.DataVisualization.Charting
             axisX2.Maximum = axisX.Maximum;
             axisY2.Minimum = axisY.Minimum;
             axisY2.Maximum = axisY.Maximum;
-
-            foreach (var s in Common.Series)
+			
+			foreach (var s in Common.Series)
             {
                 if (s.ChartArea == view.Name && s.Name != ms.Name)
                 {

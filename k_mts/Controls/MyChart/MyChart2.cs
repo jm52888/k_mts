@@ -17,7 +17,30 @@ namespace k_mts
     {
 		#region Variable and Property
 
-		
+		public int Depth
+		{
+			get
+			{
+				return (chart.Viewers.First() as ChartViewer_k_Candle).Depth;
+			}
+			set
+			{
+				if (value > 0)
+				{
+					(chart.Viewers.First() as ChartViewer_k_Candle).Depth = value;
+					Viewers.Update();
+				}
+				else if (Depth == 1)
+				{
+					throw new ArgumentException("더 이상 작아질 수 없습니다.");
+				}
+				else
+				{
+					(chart.Viewers.First() as ChartViewer_k_Candle).Depth = 1;
+					Viewers.Update();
+				}
+			}
+		}
 
 		#endregion
 

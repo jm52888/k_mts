@@ -55,6 +55,38 @@ namespace k_mts
             }
         }
 
+		private int Depth
+		{
+			get
+			{
+				int depth = 0;
+				foreach (TabPage page in ChartTab.TabPages)
+				{
+					var group = page.GetChild<MyChartGroup>();
+					if (group == null) continue;
+
+					depth = (group[0] as MyChart2).Depth;
+					break;
+				}
+				return depth;
+			}
+
+			set
+			{
+				foreach (TabPage page in ChartTab.TabPages)
+				{
+					var group = page.GetChild<MyChartGroup>();
+					if (group == null) continue;
+
+					try
+					{
+						(group[0] as MyChart2).Depth = value;
+					}
+					catch (ArgumentException ex) { MsgBox.Show(ex.Message); break; }
+				}
+			}
+		}
+
         #endregion
 
         #region Class :: RightUpMessageFilter
@@ -334,7 +366,14 @@ namespace k_mts
             if (btn == null) return;
 
             SelectedItem = btn.Tag as string;
-            if (SelectedItem == null) return;
+			// ??? 버튼을 눌렀을 때
+			if(SelectedItem == "")
+			{
+				Depth -= 10;
+				return;
+			}
+
+			if (SelectedItem == null) return;
 
             if (!Global.DB.Tables.Contains(SelectedItem + "_5"))
             {
